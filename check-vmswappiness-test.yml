@@ -1,0 +1,5 @@
+- name: check-vmswappiness
+  hosts: agent
+  become: yes
+  roles:
+    - check-vmswappiness

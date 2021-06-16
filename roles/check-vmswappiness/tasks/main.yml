@@ -1,0 +1,16 @@
+- name: set var
+  shell: cat /proc/sys/vm/swappiness
+  register: swappiness
+
+- name: out var
+  debug: var=swappiness
+
+- name: make result file
+  local_action: file path=/opt/ansible/swappiness/result/before.csv state=touch
+
+- name: write local file
+  local_action: copy content="{{inventory_hostname}} , {{ansible_host}} , {{ swappiness.stdout }}" dest=/opt/ansible/swappiness/result/before.csv
+
+  
+
+

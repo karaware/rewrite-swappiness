@@ -1,0 +1,5 @@
+- name: rewirte-vmswappiness
+  hosts: agent
+  become: yes
+  roles:
+    - rewrite-vmswappiness

@@ -1,0 +1,26 @@
+- name: make backup direcrory
+  file: path=/root/backup
+        state=directory 
+        owner=root 
+        group=root 
+        mode=0755
+
+- name: make backup
+  copy:
+    src: /etc/sysctl.conf
+    dest: /root/backup
+    remote_src: yes
+
+- name: postscript sysctl.conf
+  shell: echo "vm.swappiness = 10" >> /etc/sysctl.conf
+
+- name: reflect sysctl.conf
+  shell: sysctl -p
+
+
+#- name: rewirte swappiness ->10
+#  become: true
+#  lineinfile: 
+#    path: /proc/sys/vm/swappiness
+#    regexp: '30'
+#    line: '10'
